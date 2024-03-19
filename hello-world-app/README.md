@@ -69,8 +69,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     #!/bin/sh
     . "$(dirname "$0")/_/husky.sh"
 
-    cd ./folder-app-name && npx lint-staged
+    cd ./folder-app-name 
+    npx lint-staged
     ```
+
+6. Make the file executable: `chmod +x .husky/pre-commit.sh`.
 
 ### unit testing
 
@@ -105,4 +108,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     })
     ```
 
+3. Run `npm run test:unit` to see the tests pass.
 
+### e2e testing
