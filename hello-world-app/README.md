@@ -111,3 +111,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 3. Run `npm run test:unit` to see the tests pass.
 
 ### e2e testing
+
+1. Add the following code to `test/e2e/specs/test.ts`:
+
+    ```typescript
+    it("Visits the about page", () => {
+      cy.visit("/about");
+      cy.contains("h1", "This is an about page");
+    });
+    ```
+
+2. Run `npm run test:e2e` to see the tests pass.

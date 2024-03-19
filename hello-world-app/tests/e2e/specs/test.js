@@ -5,4 +5,9 @@ describe("My First Test", () => {
     cy.visit("/");
     cy.contains("h1", "Welcome to Your Vue.js + TypeScript App");
   });
+
+  it("Visits the about page", () => {
+    cy.visit("/about");
+    cy.contains("h1", "This is an about page");
+  });
 });
