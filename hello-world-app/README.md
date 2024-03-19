@@ -122,3 +122,54 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     ```
 
 2. Run `npm run test:e2e` to see the tests pass.
+
+### Github actions
+
+1. Create a new file in the `.github/workflows` folder called `ci.yml` and add the following code:
+
+    ```yaml
+    name: Build, Test and Dockerize
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Set up Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: 20
+
+          - name: Install dependencies
+            run: npm install
+
+          - name: Build app
+            run: npm run build
+
+      test:
+        needs: build
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Set up Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: 20
+
+          - name: Install dependencies
+            run: npm install
+
+          - name: Run unit tests
+            run: npm run test:unit
+    ```
