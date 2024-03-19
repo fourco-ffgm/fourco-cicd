@@ -6,6 +6,6 @@ export function increment(current: number, max = 10) {
 }
 
 function isEven(n: number) {
-  console.log("isEven");
+  console.log('isEven')
   return n % 2 === 0;
 }
