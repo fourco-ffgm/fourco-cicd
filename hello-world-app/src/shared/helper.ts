@@ -4,7 +4,3 @@ export function increment(current: number, max = 10) {
   }
   return current;
 }
-
-function isEven(n: number) {
-  return n % 2 === 0;
-}
