@@ -52,3 +52,18 @@ describe('increment', () => {
   })
 })
 ```
+
+### pre-commit hook
+
+```json
+"lint-staged": {
+  "*.{js,ts,vue}": [
+    "npm run lint",
+  ]
+},
+"husky": { 
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
+}
+```
