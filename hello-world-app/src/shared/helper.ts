@@ -11,3 +11,7 @@ function decrement(current: number, min = 0) {
   }
   return current;
 }
+
+function isEven(num: number) {
+  return num % 2 === 0;
+}
