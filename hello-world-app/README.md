@@ -210,3 +210,34 @@ Fix build and test:
 
 2. Run `docker build -t app-name .` to build the container.
 3. Run `docker run -p 90:80 app-name` to run the container.
+
+### Adding a job to build the container
+
+1. Add the following code to the `ci.yml` file:
+
+    ```yaml
+    build-container:
+      needs: test
+      name: Build Container
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        packages: write
+      outputs:
+        image: ${{ steps.build-image.outputs.image }}
+
+      steps:
+        - uses: actions/checkout@v4
+        - name: Build image and push it to the registry
+          id: build-image
+          env:
+            CONTAINER_REGISTRY: ghcr.io/fourco-ffgm
+            CONTAINER_REPOSITORY: fourco-workshop
+            IMAGE_TAG: ${{ github.sha }}
+          run: |
+            docker build -t $CONTAINER_REGISTRY/$CONTAINER_REPOSITORY:$IMAGE_TAG . --file Dockerfile
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+            docker push $CONTAINER_REGISTRY/$CONTAINER_REPOSITORY:$IMAGE_TAG
+    ```
+
+2. commit and push the code to your repository.
