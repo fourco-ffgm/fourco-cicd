@@ -242,3 +242,8 @@ Fix build and test:
     ```
 
 2. commit and push the code to your repository.
+3. To pull the image from registry locally, first create a classic token.
+4. login by running:
+   1. export CR_PAT=YOUR_TOKEN
+   2. echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+5. Pull the image by copying the command from your repo packags container page.
