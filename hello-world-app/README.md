@@ -173,3 +173,40 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
           - name: Run unit tests
             run: npm run test:unit
     ```
+
+Fix build and test:
+
+```yaml
+- name: Build app
+  run: |
+    cd app-folder-name 
+    npm install
+    npm run build
+```
+
+### Create a container
+
+1. Create a `Dockerfile` and add the following code:
+
+    ```dockerfile
+    FROM node:alpine as develop-stage
+    
+    WORKDIR /app
+
+    COPY package*.json ./
+    RUN npm install
+    COPY . .
+
+    # build stage
+    FROM develop-stage as build-stage
+    RUN npm run build
+
+    # production stage
+    FROM nginx:alpine as production-stage
+    COPY --from=build-stage /app/dist /usr/share/nginx/html
+    EXPOSE 90
+    CMD ["nginx", "-g", "daemon off;"]
+    ```
+
+2. Run `docker build -t app-name .` to build the container.
+3. Run `docker run -p 90:80 app-name` to run the container.
