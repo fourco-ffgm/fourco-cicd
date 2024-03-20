@@ -59,7 +59,7 @@ jobs:
         id: build-image
         env:
           CONTAINER_REGISTRY: ghcr.io/fourco-ffgm
-          CONTAINER_REPOSITORY: fourco-workshop
+          CONTAINER_REPOSITORY: fourco-cicd
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $CONTAINER_REGISTRY/$CONTAINER_REPOSITORY:$IMAGE_TAG . --file Dockerfile
