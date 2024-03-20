@@ -235,6 +235,7 @@ Fix build and test:
             CONTAINER_REPOSITORY: fourco-workshop
             IMAGE_TAG: ${{ github.sha }}
           run: |
+            cd app-folder-name
             docker build -t $CONTAINER_REGISTRY/$CONTAINER_REPOSITORY:$IMAGE_TAG . --file Dockerfile
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
             docker push $CONTAINER_REGISTRY/$CONTAINER_REPOSITORY:$IMAGE_TAG
