@@ -11,3 +11,7 @@ function decrement(current: number, min = 0) {
   }
   return current;
 }
+
+function reset() {
+  return 0;
+}
